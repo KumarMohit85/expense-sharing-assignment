@@ -300,24 +300,14 @@ Right now there's no auth. In production you'd want:
 ### Richer Expense Types
 - Custom splits (30/50/20 instead of equal)
 - Unequal shares marked at creation time
-- Itemized expenses (track who ate what)
 
 ### Expense Editing
 - Allow editing/deleting expenses
 - Track change history for audit
 
-### Partial Payments
-- Record when someone pays back only part of what they owe
-- Show progress toward settlement
-
 ### Better Settlement Algorithm
 - Use a proper minimum-transfer algorithm (currently just greedy)
 - Calculate the true minimum number of transactions needed
-
-### Notifications
-- Email notifications when added to a group
-- Reminders when you owe money
-- Settlement confirmations
 
 ### UI Dashboard
 - Simple frontend to visualize balances
@@ -329,25 +319,11 @@ Right now there's no auth. In production you'd want:
 - Archive old groups instead of deleting
 - Add soft deletes for expenses
 
-### Better Error Handling
-- More specific error messages
-- Custom exception classes
-- Proper error logging
-
-### Validation Rules
-- Prevent adding same person to group twice (currently errors, but could be friendlier)
-- Prevent circular debt scenarios earlier
-- Show warnings for edge cases
-
 ### Tests
 - Unit tests for service logic
 - Integration tests for API endpoints
 - Load testing for performance
 
-### Documentation
-- OpenAPI/Swagger UI (FastAPI has this built-in, just need to enable)
-- More inline code comments
-- Architecture decision records (ADRs)
 
 ## Files to Configure Manually
 
