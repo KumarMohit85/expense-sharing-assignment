@@ -23,7 +23,29 @@ A simple expense-sharing API built with FastAPI. The idea is to track expenses w
    pip install -r requirements.txt
    ```
 
-4. Set up database
+4. Create `.env` file (required, not included in repo)
+   
+   This file is ignored by Git for security. Create it manually:
+   
+   ```bash
+   # On Windows
+   type nul > .env
+   
+   # On Linux/Mac
+   touch .env
+   ```
+   
+   Then add the following environment variables to `.env`:
+   ```env
+   DATABASE_URL=postgresql+psycopg://postgres:password@localhost:5433/expense_sharing_db
+   APP_NAME=Expense Sharing Service
+   APP_ENV=development
+   DEBUG=True
+   ```
+   
+   **Note**: Adjust `DATABASE_URL` if your PostgreSQL credentials or port are different.
+
+5. Set up database
    Make sure PostgreSQL is running locally on port 5433 (or update `.env`).
    ```bash
    alembic upgrade head
@@ -303,6 +325,42 @@ Right now there's no auth. In production you'd want:
 - OpenAPI/Swagger UI (FastAPI has this built-in, just need to enable)
 - More inline code comments
 - Architecture decision records (ADRs)
+
+## Files to Configure Manually
+
+The following files are **ignored by Git** for security and environment-specific reasons. They are not in the repository, so you must create them manually when setting up:
+
+### `.env` (Required)
+Environment variables configuration file.
+
+**Create it** in the project root:
+```bash
+# Windows
+type nul > .env
+
+# Linux/Mac
+touch .env
+```
+
+**Add these variables**:
+```env
+DATABASE_URL=postgresql+psycopg://postgres:password@localhost:5433/expense_sharing_db
+APP_NAME=Expense Sharing Service
+APP_ENV=development
+DEBUG=True
+```
+
+**Why it's ignored**: Contains sensitive data like database passwords. Never commit this to Git.
+
+### `venv/` (Virtual Environment)
+Python virtual environment directory.
+
+**Create it** by running:
+```bash
+python -m venv venv
+```
+
+This directory is excluded from Git because it's specific to each developer's machine and contains many files.
 
 ## Running Migrations
 
