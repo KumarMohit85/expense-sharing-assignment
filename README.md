@@ -60,6 +60,25 @@ A simple expense-sharing API built with FastAPI. The idea is to track expenses w
 
 ### With Docker
 
+Before starting Docker, create a `.env` file and copy the same environment variables used in the non-Docker setup.
+
+```bash
+# On Windows
+type nul > .env
+
+# On Linux/Mac
+touch .env
+```
+
+Then add:
+
+```env
+DATABASE_URL=postgresql+psycopg://postgres:password@localhost:5433/expense_sharing_db
+APP_NAME=Expense Sharing Service
+APP_ENV=development
+DEBUG=True
+```
+
 ```bash
 docker compose up --build
 ```
