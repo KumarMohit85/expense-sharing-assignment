@@ -1,0 +1,282 @@
+{
+	"info": {
+		"name": "Expense Sharing Service",
+		"description": "API collection for the expense sharing service. Run the requests in order: create users, create a group, add members, create an expense, then check balances and settlements. The create requests save the generated ids into collection variables automatically.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000"
+		},
+		{
+			"key": "user_id",
+			"value": ""
+		},
+		{
+			"key": "group_id",
+			"value": ""
+		},
+		{
+			"key": "expense_id",
+			"value": ""
+		}
+	],
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.collectionVariables.set(\"user_id\", data.user_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Alice\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/",
+							"host": ["{{base_url}}"],
+							"path": ["users", ""]
+						}
+					}
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/users/",
+							"host": ["{{base_url}}"],
+							"path": ["users", ""]
+						}
+					}
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["users", "{{user_id}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "Create Group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.collectionVariables.set(\"group_id\", data.group_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Goa Trip\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/groups/",
+							"host": ["{{base_url}}"],
+							"path": ["groups", ""]
+						}
+					}
+				},
+				{
+					"name": "Get All Groups",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/groups/",
+							"host": ["{{base_url}}"],
+							"path": ["groups", ""]
+						}
+					}
+				},
+				{
+					"name": "Get Group By ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/groups/{{group_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["groups", "{{group_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Add Member To Group",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_ids\": [\"{{user_id}}\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/groups/{{group_id}}/members",
+							"host": ["{{base_url}}"],
+							"path": ["groups", "{{group_id}}", "members"]
+						}
+					}
+				},
+				{
+					"name": "Get Group Members",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/groups/{{group_id}}/members",
+							"host": ["{{base_url}}"],
+							"path": ["groups", "{{group_id}}", "members"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Expenses",
+			"item": [
+				{
+					"name": "Create Expense",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.collectionVariables.set(\"expense_id\", data.expense_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"group_id\": \"{{group_id}}\",\n    \"paid_by\": \"{{user_id}}\",\n    \"amount\": 100,\n    \"description\": \"Dinner\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/expenses",
+							"host": ["{{base_url}}"],
+							"path": ["expenses"]
+						}
+					}
+				},
+				{
+					"name": "Get Expense By ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/expenses/{{expense_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["expenses", "{{expense_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Get Group Expenses",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/groups/{{group_id}}/expenses",
+							"host": ["{{base_url}}"],
+							"path": ["groups", "{{group_id}}", "expenses"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Balances",
+			"item": [
+				{
+					"name": "Get Group Balances",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/groups/{{group_id}}/balances",
+							"host": ["{{base_url}}"],
+							"path": ["groups", "{{group_id}}", "balances"]
+						}
+					}
+				},
+				{
+					"name": "Get Pairwise Balances",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/groups/{{group_id}}/balances/pairwise",
+							"host": ["{{base_url}}"],
+							"path": ["groups", "{{group_id}}", "balances", "pairwise"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Settlements",
+			"item": [
+				{
+					"name": "Get Settlement Suggestions",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/groups/{{group_id}}/settlements",
+							"host": ["{{base_url}}"],
+							"path": ["groups", "{{group_id}}", "settlements"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
