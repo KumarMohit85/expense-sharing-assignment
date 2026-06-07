@@ -57,6 +57,8 @@ A simple expense-sharing API built with FastAPI. The idea is to track expenses w
    ```
 
    App runs on `http://localhost:8000`
+   
+   After installation, open `http://localhost:8000/docs` to test the API using FastAPI Swagger UI.
 
 ### With Docker
 
@@ -87,6 +89,8 @@ Services:
 - App: `http://localhost:8000`
 - PostgreSQL: `localhost:5433`
 - pgAdmin (database UI): `http://localhost:5050`
+
+After installation, open `http://localhost:8000/docs` to test the API using FastAPI Swagger UI.
 
 For more details, see [DOCKER_SETUP.md](DOCKER_SETUP.md).
 
